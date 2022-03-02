@@ -67,6 +67,8 @@ if [ $ADD_DOMAIN -eq 0 ]; then
    ${DOMAIN_HOME}/bin/setDomainEnv.sh
 fi
 
+wlst.sh -loadProperties /u01/oracle/properties/datasource.properties /u01/oracle/ds-deploy.py
+
 # Start Admin Server and tail the logs
 ${DOMAIN_HOME}/startWebLogic.sh
 touch ${DOMAIN_HOME}/servers/AdminServer/logs/AdminServer.log

@@ -27,7 +27,7 @@
 # Extend base JRE image
 # You must build the image by using the Dockerfile in GitHub project `../../../OracleJava/java8`
 # ----------------------------------------------------------------------------------------------
-FROM oracle/serverjre:8 as builder
+FROM nexus.unige.ch:446/oracle/serverjre:8-oraclelinux7 as builder
 
 # Labels
 # ------
@@ -97,7 +97,7 @@ RUN mkdir -p /u01 && \
 COPY --from=builder --chown=oracle:root /u01 /u01
 # Copy scripts
 #-------------
-COPY container-scripts/createAndStartEmptyDomain.sh container-scripts/create-wls-domain.py container-scripts/get_healthcheck_url.sh /u01/oracle/
+COPY container-scripts/* /u01/oracle/
 
 RUN chmod +xr $SCRIPT_FILE $HEALTH_SCRIPT_FILE && \
     chown oracle:root $SCRIPT_FILE /u01/oracle/create-wls-domain.py $HEALTH_SCRIPT_FILE
